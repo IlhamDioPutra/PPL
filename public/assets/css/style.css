@@ -1,0 +1,71 @@
+
+/* corporate-ui-dashboard.css | http://127.0.0.1:8000/assets/css/corporate-ui-dashboard.css?v=1.0.0 */
+
+body {
+    /* width: 100%; */
+    /* }: ; */
+    background-color: rgba(255, 255, 255, 0.8);
+    \}: ;
+  }
+
+  .h-100 {
+    /* width: 100%; */
+  }
+
+  .w-40 {
+    /* width: 40% !important; */
+    width: 100% !important;
+  }
+
+  .d-flex {
+    /* }: ; */
+    z-index: 2;
+    \}: ;
+  }
+
+  .card {
+    /* box-shadow: 0 20px 27px 0 rgba(0, 0, 0, 0.05); */
+    /* }: ; */
+    background-color: rgba(255, 255, 255, 0.8);
+    \}: ;
+  }
+
+  .container, .container-fluid, .container-sm, .container-md, .container-lg, .container-xl, .container-xxl {
+    /* }: ; */
+    /* align-items: center; */
+    background-color: rgba(255, 255, 255, 0.8);
+    \}: ;
+    align-items: ;
+  }
+
+  body {
+    /* }: ; */
+    background-color: rgba(255, 255, 255, 0.8);
+    \}: ;
+  }
+
+  .card {
+    /* }: ; */
+    background-color: rgba(255, 255, 255, 0.8);
+    \}: ;
+  }
+
+  .card.card-plain {
+    /* }: ; */
+    background-color: rgba(255, 255, 255, 0.8);
+    \}: ;
+  }
+
+  @media (min-width: 768px) {
+    .col-md-6 {
+      /* width: 50%; */
+    }
+  }
+
+  .row > * {
+    /* width: 100%; */
+  }
+
+  p {
+    color: #222;
+  }
