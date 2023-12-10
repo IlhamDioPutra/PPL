@@ -27,9 +27,15 @@ Route::middleware(['auth'])->group(function () {
     Route::redirect('/', '/dashboard');
     Route::view('/dashboard', 'Dashboard.dashboard')->name('dashboard');
 });
+Route::get('RBA/DaftarKegiatan/export', [DaftarKegiatanController::class, 'export'])->middleware('auth')->name('RBA.DaftarKegiatan.Export');
+Route::post('RBA/DaftarKegiatan/import', [DaftarKegiatanController::class, 'import'])->middleware('auth')->name('RBA.DaftarKegiatan.Import');
+
 Route::middleware(['auth'])->group(function () {
     Route::name('RBA.')->prefix('RBA')->group( function () {
         Route::resource('DaftarKegiatan', DaftarKegiatanController::class);
     });
+
+
+        
 
 });

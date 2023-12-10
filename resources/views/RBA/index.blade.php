@@ -22,17 +22,59 @@
                       </span>
                       <span class="btn-inner--text" style="font-size: 1.2em;">Tambahkan Data</span>
                     </button></a>
+                    <span>
+                      <a href="{{ route('RBA.DaftarKegiatan.Export') }}" class="btn btn-success">Export Excel</a>
+                    </span>
+                    <span>
+                      <!-- Button trigger modal -->
+                      <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Import Excel
+                      </button>
+
+                      <!-- Modal -->
+                      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                              <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                                <!--begin::Svg Icon | path: assets/media/icons/duotune/arrows/arr088.svg-->
+                              <span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect opacity="0.5" x="7.05025" y="15.5356" width="12" height="2" rx="1" transform="rotate(-45 7.05025 15.5356)" fill="black"/>
+                                <rect x="8.46447" y="7.05029" width="12" height="2" rx="1" transform="rotate(45 8.46447 7.05029)" fill="black"/>
+                                </svg></span>
+                                <!--end::Svg Icon-->
+                            </div>
+                            </div>
+                            <form action="{{ route('RBA.DaftarKegiatan.Import') }}" method="POST" enctype="multipart/form-data">
+                              @csrf
+                            <div class="modal-body">
+                              <div class="form-group">
+                                <input type="file" name="file" required>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                          </div>
+                         </form>
+                        </div>
+                      </div>
+                    </span>
                 <div class="input-group w-sm-25 ms-auto">
                   <span class="input-group-text text-body">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
                     </svg>
                   </span>
-                  <input type="text" class="form-control" placeholder="Search">
+                  <input type="text" class="form-control" placeholder="Search" id="search">
                 </div>
               </div>
-              <div class="table-responsive p-0">
-                <table class="table">
+              <div style="text-align: right; margin-right: 20vw;">
+                <span class="text-sm font-weight-bold">total anggaran {{ $totalAnggaranAsli }}</span>
+            </div>
+                <table class="table" id="dataTables">
                   <thead class="bg-gray-100">
                     <tr>
                       <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light">NO</th>
@@ -54,7 +96,7 @@
                       <td class="text-sm text-secondary mb-0">{{ $data->nama_kegiatan }}</td>
                       <td class="text-sm text-secondary mb-0">{{ $data->iku }}</td>
                       <td class="text-sm text-secondary mb-0">{{ $data->masukan_keluaran }}</td>
-                      <td class="text-sm text-secondary mb-0">{{ $data->anggaran }}</td>
+                      <td class="text-sm text-secondary mb-0">{{ number_format($data->anggaran, 0, ",", ".") }}</td>
                       <td class="text-sm text-secondary mb-0">{{ $data->sumber_dana }}</td>
                       <td class="text-sm text-secondary mb-0 text-center">
                         <a href="{{ route('RBA.DaftarKegiatan.edit', $data->no_form) }}" class="btn btn-info text-sm mb-0">Edit</a>
@@ -66,25 +108,21 @@
                       </td>
                     </tr>
                     @endforeach
-                    <tr style="background-color: rgb(152, 248, 152); ">
-                      <th scope="row" class="text-smfw-bold mb-0">TOTAL</th>
-                      <td class="text-sm text-secondary mb-0"></td>
+                    {{-- <tr style="background-color: rgb(152, 248, 152); ">
+                      <th scope="row" class="text-smfw-bold mb-0" ></th>
+                      <td class="text-sm text-secondary mb-0">TOTAL</td>
                       <td class="text-sm text-secondary mb-0"></td>
                       <td class="text-sm text-secondary mb-0"></td>
                       <td class="text-sm text-secondary mb-0"></td>
                       <td class="text-sm text-secondary mb-0">{{ $totalAnggaran }}</td>
                       <td class="text-sm text-secondary mb-0"></td>
                       <td class="text-sm text-secondary mb-0"></td>
-                    </tr>
+                    </tr> --}}
                   </tbody>
                 </table>
+                <h3 class="text-center"  >Total: Rp{{ number_format($totalAnggaran, 0, ",", ".") }}</div>
               </div>
               <div class="border-top py-3 px-3 d-flex align-items-center">
-                <p class="font-weight-semibold mb-0 text-dark text-sm">Page 1 of 10</p>
-                <div class="ms-auto">
-                  <button class="btn btn-sm btn-white mb-0">Previous</button>
-                  <button class="btn btn-sm btn-white mb-0">Next</button>
-                </div>
                 {{-- toastr --}}
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" 
                 integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" 
@@ -100,6 +138,7 @@
               </div>
             </div>
           </div>
+
           <script>
             $(document).ready(function () {
                 // Tangkap klik tombol delete
@@ -165,9 +204,14 @@
             toastr.success("{{ Session::get('success') }}")
            @endif 
         </script>
+           <script>
+            @if (Session::has('error'))
+            toastr.error("{{ Session::get('error') }}")
+           @endif 
+        </script>
 
         
-        
+        @include('RBA.script')
           @endsection
         </main>
 

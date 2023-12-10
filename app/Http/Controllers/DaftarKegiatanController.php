@@ -2,9 +2,17 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Imports\UsersImport;
 use Illuminate\Http\Request;
 use App\Models\DaftarKegiatan;
+use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\DaftarKegiatanExport;
+use App\Imports\DaftarKegiatanImport;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class DaftarKegiatanController extends Controller
 {
@@ -15,7 +23,8 @@ class DaftarKegiatanController extends Controller
     {
         $datas = DaftarKegiatan::all();
         $totalAnggaran = DaftarKegiatan::sum('anggaran');
-        return view('RBA.index', compact('datas', 'totalAnggaran'));
+        $totalAnggaranAsli = 600000000;
+        return view('RBA.index', compact('datas', 'totalAnggaran','totalAnggaranAsli'));
     }
 
     /**
@@ -68,8 +77,19 @@ class DaftarKegiatanController extends Controller
             'anggaran' => $request->anggaran,
             'sumber_dana' => $request->sumber_dana,
         ];
+        $totalAnggaran = 600000000;
+        $totalAnggaranDigunakan = DaftarKegiatan::sum('anggaran') + $datas['anggaran'];
+        $totalValid = $totalAnggaran - $totalAnggaranDigunakan;
+
+        if ($totalValid < 0){
+            return redirect()->to('RBA/DaftarKegiatan')->with('error', 'Anggaran Kegiatan yang Anda masukkan Melebihi anggaran Dana');
+        }
+        else {
+
         DaftarKegiatan::create($datas);
         return redirect()->to('RBA/DaftarKegiatan')->with('success', 'Data berhasil ditambahkan');
+        }
+
     }
 
     /**
@@ -119,8 +139,17 @@ class DaftarKegiatanController extends Controller
             'anggaran' => $request->anggaran,
             'sumber_dana' => $request->sumber_dana,
         ];
+        $totalAnggaran = 600000000;
+        $totalAnggaranDigunakan = DaftarKegiatan::sum('anggaran') + $data['anggaran'];
+        $totalValid = $totalAnggaran - $totalAnggaranDigunakan;
+
+        if ($totalValid < 0){
+            return redirect()->to('RBA/DaftarKegiatan')->with('error', 'Anggaran Kegiatan yang Anda masukkan Melebihi anggaran Dana');
+        }
+        else {
         DaftarKegiatan::where('no_form', $id)->update($data); 
         return redirect()->to('RBA/DaftarKegiatan')->with('success', 'Data berhasil diupdate');
+        }
     }
 
     /**
@@ -138,6 +167,29 @@ class DaftarKegiatanController extends Controller
 
         // Berikan respons sukses jika penghapusan berhasil
         return redirect()->to('RBA/DaftarKegiatan')->with('success','Data berhasil dihapus');
+    }
+    public function export() 
+    {
+    return Excel::download(new DaftarKegiatanExport, 'DaftarKegiatan.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $data = $request->file('file');
+
+        $namafile = $data->getClientOriginalName();
+
+        $data->move('DaftarKegiatanData',$namafile);
+
+        try {
+            Excel::import(new DaftarKegiatanImport, \public_path('/DaftarKegiatanData/'.$namafile));
+            return redirect()->back()->with('success', 'Data berhasil diimpor');
+
+        } catch (\Throwable $th) {
+        return redirect()->back()->with('error', 'Terdapat data yang sudah ada di database!');
+
+        }
+        
     }
     
 }

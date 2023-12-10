@@ -21,10 +21,10 @@
         <title itemprop="name">
             E-Finance FKIK
         </title>
-        <meta name="twitter:card" content="summary" />
+        {{-- <meta name="twitter:card" content="summary" /> --}}
         {{-- untuk allert --}}
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta name="twitter:card" content="summary_large_image">
+        {{-- <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="@CreativeTim" />
         <meta name="twitter:creator" content="@CreativeTim" />
         <meta name="twitter:title" content="Corporate UI Dashboard Laravel by Creative Tim & UPDIVISION" />
@@ -49,7 +49,7 @@
         <meta property="product:availability" content="in Stock">
         <meta property="product:brand" content="Creative Tim">
         <meta property="product:category" content="Admin &amp; Dashboards">
-        <meta name="data-turbolinks-track" content="false">
+        <meta name="data-turbolinks-track" content="false"> --}}
     <link rel="apple-touch-icon" sizes="76x76" href="../../../../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../../../../assets/img/icon-finance.png">
     {{-- toastr --}}
@@ -71,10 +71,19 @@
     <link href="../../../../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="../../../../assets/css/corporate-ui-dashboard.css?v=1.0.0" rel="stylesheet" />
+    {{-- cdn tables --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
     {{-- jquery --}}
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" 
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
     crossorigin="anonymous"></script>
+    <link href= "{{ asset('assets/plugin/datatables/datatables.bundle.css') }}">
+    {{-- <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script> --}}
+    <style>
+        .page-item.active .page-link {
+            background-color: rgb(29, 114, 242);
+        }
+    </style>
 
 </head>
 
@@ -304,10 +313,14 @@
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
     </script>
+    <script src = "{{ asset('assets/plugin/datatables/datatables.bundle.js') }}"></script>
+
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Corporate UI Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="../../../../assets/js/corporate-ui-dashboard.min.js?v=1.0.0"></script>
+
+    @yield('script')
 </body>
 
 </html>

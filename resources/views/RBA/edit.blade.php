@@ -4,6 +4,7 @@
         <div class="card border shadow-xs mb-4">
             <div class="card-header border-bottom pb-0">
                 <h6 class="font-weight-semibold text-lg mb-0">Edit Daftar Kegiatan</h6>
+                <a href="{{ route('RBA.DaftarKegiatan.index') }}" class="btn btn-secondary"><< kembali</a>
                 {{-- @include('component.pesan') --}}
                 <div class="d-sm-flex align-items-center">
                     <div class="ms-auto d-flex">
