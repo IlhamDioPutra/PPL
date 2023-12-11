@@ -181,6 +181,8 @@ class DaftarKegiatanController extends Controller
 
         $data->move('DaftarKegiatanData',$namafile);
 
+    
+
         try {
             Excel::import(new DaftarKegiatanImport, \public_path('/DaftarKegiatanData/'.$namafile));
             return redirect()->back()->with('success', 'Data berhasil diimpor');

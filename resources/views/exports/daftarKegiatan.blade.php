@@ -11,6 +11,15 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <th></th>
+            <td>TOTAL ANGGARAN</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{ number_format($totalAnggaranAsli, 0, ',', '.') }}</td>
+            <td></td>
+        </tr>
         @foreach ($datas as $data)
             <tr>
                 <th>{{ $loop->iteration }}</th>
@@ -18,13 +27,13 @@
                 <td>{{ $data->nama_kegiatan }}</td>
                 <td>{{ $data->iku }}</td>
                 <td>{{ $data->masukan_keluaran }}</td>
-                <td>{{ number_format($data->anggaran, 0, ',', '.') }}</td>
+                <td>{{ number_format($data->anggaran, 0, '.', '.') }}</td>
                 <td>{{ $data->sumber_dana }}</td>
             </tr>
         @endforeach
         <tr>
             <th></th>
-            <td>TOTAL</td>
+            <td>TOTAL REALISASI</td>
             <td></td>
             <td></td>
             <td></td>

@@ -72,7 +72,7 @@
                 </div>
               </div>
               <div style="text-align: right; margin-right: 20vw;">
-                <span class="text-sm font-weight-bold">total anggaran {{ $totalAnggaranAsli }}</span>
+                <span class="text-sm font-weight-bold">total anggaran {{ number_format($totalAnggaranAsli, 0, ",", ".") }}</span>
             </div>
                 <table class="table" id="dataTables">
                   <thead class="bg-gray-100">
@@ -120,7 +120,10 @@
                     </tr> --}}
                   </tbody>
                 </table>
-                <h3 class="text-center"  >Total: Rp{{ number_format($totalAnggaran, 0, ",", ".") }}</div>
+                <div style="text-align: right; margin-right: 20vw;">
+                  <span class="text-sm font-weight-bold">total realisasi anggaran {{ number_format($totalAnggaran, 0, ",", ".") }}</span>
+                </div>
+                </div>
               </div>
               <div class="border-top py-3 px-3 d-flex align-items-center">
                 {{-- toastr --}}
