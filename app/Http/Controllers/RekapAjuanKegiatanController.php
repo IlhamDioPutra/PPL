@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\RekapAjuanKegiatanExport;
 use Illuminate\Http\Request;
 use App\Models\DaftarKegiatan;
 use App\Models\RekapAjuanKegiatan;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Session;
+use App\Exports\RekapAjuanKegiatanExport;
+use App\Imports\RekapAjuanKegiatanImport;
 
 class RekapAjuanKegiatanController extends Controller
 {
@@ -211,22 +212,20 @@ class RekapAjuanKegiatanController extends Controller
 
     public function import(Request $request)
     {
-        // $data = $request->file('file');
+        $data = $request->file('file');
 
-        // $namafile = $data->getClientOriginalName();
+        $namafile = $data->getClientOriginalName();
 
-        // $data->move('DaftarKegiatanData',$namafile);
+        $data->move('RekapAjuanKegiatan',$namafile);
 
     
 
-        // try {
-        //     Excel::import(new DaftarKegiatanImport, \public_path('/DaftarKegiatanData/'.$namafile));
-        //     return redirect()->back()->with('success', 'Data berhasil diimpor');
+            Excel::import(new RekapAjuanKegiatanImport, \public_path('/RekapAjuanKegiatan/'.$namafile));
+            return redirect()->back()->with('success', 'Rekap Data berhasil diimpor');
 
-        // } catch (\Throwable $th) {
-        // return redirect()->back()->with('error', 'Terdapat data yang sudah ada di database!');
-
-        // }
+        
         
     }
+        
 }
+
