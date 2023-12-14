@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DaftarKegiatanController;
+use App\Http\Controllers\RekapAjuanKegiatanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,12 +31,20 @@ Route::middleware(['auth'])->group(function () {
 Route::get('RBA/DaftarKegiatan/export', [DaftarKegiatanController::class, 'export'])->middleware('auth')->name('RBA.DaftarKegiatan.Export');
 Route::post('RBA/DaftarKegiatan/import', [DaftarKegiatanController::class, 'import'])->middleware('auth')->name('RBA.DaftarKegiatan.Import');
 
+
 Route::middleware(['auth'])->group(function () {
     Route::name('RBA.')->prefix('RBA')->group( function () {
         Route::resource('DaftarKegiatan', DaftarKegiatanController::class);
     });
+});
 
 
-        
 
+Route::get('RBA/RekapAjuanKegiatan/export', [RekapAjuanKegiatanController::class, 'export'])->middleware('auth')->name('RBA.RekapAjuanKegiatan.Export');
+Route::post('RBA/RekapAjuanKegiatan/import', [RekapAjuanKegiatanController::class, 'import'])->middleware('auth')->name('RBA.RekapAjuanKegiatan.Import');
+
+Route::middleware(['auth'])->group(function () {
+    Route::name('RBA.')->prefix('RBA')->group( function () {
+        Route::resource('RekapAjuanKegiatan', RekapAjuanKegiatanController::class);
+    });
 });

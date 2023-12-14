@@ -18,20 +18,20 @@ class DaftarKegiatanImport implements ToModel
     public function model(array $row)
     {
          // Menghitung total anggaran yang diimpor
-         $this->totalAnggaranImported += (int)$row[5];
+        //  $this->totalAnggaranImported += (int)$row[5];
 
-         // Menghitung total anggaran keseluruhan (termasuk yang sudah ada di database)
-         $totalAnggaranDigunakan = DaftarKegiatan::sum('anggaran');
-         $totalAnggaranRealisasi = $this->totalAnggaranImported + $totalAnggaranDigunakan;
+        //  // Menghitung total anggaran keseluruhan (termasuk yang sudah ada di database)
+        //  $totalAnggaranDigunakan = DaftarKegiatan::sum('anggaran');
+        //  $totalAnggaranRealisasi = $this->totalAnggaranImported + $totalAnggaranDigunakan;
  
-         // Menetapkan batasan anggaran
-         $batasanAnggaran = 600000000;
+        //  // Menetapkan batasan anggaran
+        //  $batasanAnggaran = 600000000;
  
-         // Memeriksa apakah total anggaran melebihi batasan
-         if ($totalAnggaranRealisasi > $batasanAnggaran) {
-             // Jika melebihi batasan, kembalikan null (tidak membuat instance model)
-             return null;
-         }
+        //  // Memeriksa apakah total anggaran melebihi batasan
+        //  if ($totalAnggaranRealisasi > $batasanAnggaran) {
+        //      // Jika melebihi batasan, kembalikan null (tidak membuat instance model)
+        //      return null;
+        //  }
  
          // Jika tidak melebihi batasan, buat dan kembalikan instance model DaftarKegiatan
          return new DaftarKegiatan([

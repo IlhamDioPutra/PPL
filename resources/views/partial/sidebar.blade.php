@@ -17,7 +17,7 @@
                 <a class="sub-btn"><i class="fas fa-user"></i>Manajemen RBA<i class="fas fa-angle-right dropdown"></i>
                 <div class="sub-menu">
                     <a href="{{ route('RBA.DaftarKegiatan.index') }}" class="sub-item">Daftar Kegiatan</a>
-                    <a href="#" class="sub-item">Rencana Kegiatan</a>
+                    <a href="{{ route('RBA.RekapAjuanKegiatan.index') }}" class="sub-item">Rencana Kegiatan</a>
                     <a href="#" class="sub-item">Rekapitulasi Kegiatan</a>
                     <a href="#" class="sub-item">Rekapitulasi Akhir</a>
                   </div>

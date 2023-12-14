@@ -13,7 +13,19 @@ return new class extends Migration
     {
         Schema::create('rekap_ajuan_kegiatans', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            
+             // Kolom-kolom tambahan sesuai kebutuhan
+             $table->integer('max');
+             $table->string('belanja');
+             $table->integer('vol');
+             $table->string('satuan');
+             $table->integer('biaya');
+             $table->integer('anggaran_kegiatan');
+ 
+             // Foreign key ke daftar_kegiatan
+             $table->unsignedBigInteger('daftar_kegiatan_id');
+             $table->foreign('daftar_kegiatan_id')
+                   ->references('id')->on('daftar_kegiatan');
         });
     }
 

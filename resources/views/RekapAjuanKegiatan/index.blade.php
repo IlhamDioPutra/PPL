@@ -13,17 +13,17 @@
             <div class="card-body px-0 py-0">
                 
                 <div class="border-bottom py-3 px-3 d-sm-flex align-items-center">
-                  <a href="{{ route('RBA.DaftarKegiatan.create') }}">
+                  <a href="{{ route('RBA.RekapAjuanKegiatan.create') }}">
                   <button type="button" class="btn btn-sm btn-dark btn-icon d-flex align-items-center me-2">
                       <span class="btn-inner--icon">
                         <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="d-block me-2">
                           <path d="M6.25 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM3.25 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM19.75 7.5a.75.75 0 00-1.5 0v2.25H16a.75.75 0 000 1.5h2.25v2.25a.75.75 0 001.5 0v-2.25H22a.75.75 0 000-1.5h-2.25V7.5z"></path>
                         </svg>
                       </span>
-                      <span class="btn-inner--text" style="font-size: 1.2em;">Tambahkan Data</span>
+                      <span class="btn-inner--text" style="font-size: 1.2em;">Tambahkan Data Rekap Ajuan Kegiatan</span>
                     </button></a>
                     <span>
-                      <a href="{{ route('RBA.DaftarKegiatan.Export') }}" class="btn btn-success">Export Excel</a>
+                      <a href="{{ route('RBA.RekapAjuanKegiatan.Export') }}" class="btn btn-success">Export Excel</a>
                     </span>
                     <span>
                       <!-- Button trigger modal -->
@@ -36,7 +36,7 @@
                         <div class="modal-dialog">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                              <h5 class="modal-title" id="exampleModalLabel">Import Excel</h5>
                               <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
                                 <!--begin::Svg Icon | path: assets/media/icons/duotune/arrows/arr088.svg-->
                               <span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -46,7 +46,7 @@
                                 <!--end::Svg Icon-->
                             </div>
                             </div>
-                            <form action="{{ route('RBA.DaftarKegiatan.Import') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('RBA.RekapAjuanKegiatan.Import') }}" method="POST" enctype="multipart/form-data">
                               @csrf
                             <div class="modal-body">
                               <div class="form-group">
@@ -55,7 +55,7 @@
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button type="submit" class="btn btn-primary">Save changes</button>
+                              <button type="submit" class="btn btn-primary">Simpan </button>
                             </div>
                           </div>
                          </form>
@@ -72,17 +72,23 @@
                 </div>
               </div>
               <div style="text-align: right; margin-right: 20vw;">
-                <span class="text-sm font-weight-bold">total anggaran {{ number_format($totalAnggaran, 0, ",", ".") }}</span>
+                <span class="text-sm font-weight-bold">total anggaran Yang diajukan : {{ number_format($totalRekapAnggaran, 0, ",", ".") }}</span>
             </div>
                 <table class="table" id="dataTables">
                   <thead class="bg-gray-100">
                     <tr>
                       <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light">NO</th>
                       <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light ps-2">No Form</th>
+                      <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light ps-2">Max</th>
                       <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light ps-2">Nama Kegiatan</th>
+                      <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light ps-2">Belanja</th>
                       <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light ps-2">IKU</th>
+                      <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light ps-2">Vol</th>
+                      <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light ps-2">Satuan</th>
                       <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light ps-2">Masukan / Keluaran Output</th>
-                      <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light ps-2">Anggaran</th>
+                      <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light ps-2">Biaya</th>
+                      <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light ps-2">Biaya Anggaran</th>
+                      <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light ps-2">Total Anggaran</th>
                       <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light ps-2">Sumber Dana</th>
                       <th scope="col" class="text-secondary text-center text-sm font-weight-bold opacity-7 border-light ps-2">Aksi</th>
                     </tr>
@@ -96,15 +102,21 @@
                     <tr>
                       <input type="hidden" class="delete_id" value="{{ $data->id }}">
                       <th scope="row" class="text-sm text-secondary mb-0">{{ $loop->iteration }}</th>
-                      <td class="text-sm text-secondary mb-0">{{ $data->no_form }}</td>
-                      <td class="text-sm text-secondary mb-0">{{ $data->nama_kegiatan }}</td>
-                      <td class="text-sm text-secondary mb-0">{{ $data->iku }}</td>
-                      <td class="text-sm text-secondary mb-0">{{ $data->masukan_keluaran }}</td>
-                      <td class="text-sm text-secondary mb-0">{{ number_format($data->anggaran, 0, ",", ".") }}</td>
-                      <td class="text-sm text-secondary mb-0">{{ $data->sumber_dana }}</td>
+                      <td class="text-sm text-secondary mb-0">{{ $data->DaftarKegiatan->no_form }}</td>
+                      <td class="text-sm text-secondary mb-0">{{ $data->max }}</td>
+                      <td class="text-sm text-secondary mb-0">{{ $data->DaftarKegiatan->nama_kegiatan }}</td>
+                      <td class="text-sm text-secondary mb-0">{{ $data->belanja }}</td>
+                      <td class="text-sm text-secondary mb-0">{{ $data->DaftarKegiatan->iku }}</td>
+                      <td class="text-sm text-secondary mb-0">{{ $data->vol }}</td>
+                      <td class="text-sm text-secondary mb-0">{{ $data->satuan }}</td>
+                      <td class="text-sm text-secondary mb-0">{{ $data->DaftarKegiatan->masukan_keluaran }}</td>
+                      <td class="text-sm text-secondary mb-0">{{ number_format($data->biaya, 0, ",", ".") }}</td>
+                      <td class="text-sm text-secondary mb-0">{{ number_format($data->anggaran_kegiatan, 0, ",", ".") }}</td>
+                      <td class="text-sm text-secondary mb-0">{{ number_format($data->DaftarKegiatan->anggaran, 0, ",", ".") }}</td>
+                      <td class="text-sm text-secondary mb-0">{{ $data->DaftarKegiatan->sumber_dana }}</td>
                       <td class="text-sm text-secondary mb-0 text-center">
-                        <a href="{{ route('RBA.DaftarKegiatan.edit', $data->no_form) }}" class="btn btn-info text-sm mb-0">Edit</a>
-                        <form class="d-inline" action="{{ route('RBA.DaftarKegiatan.destroy',$data->id) }}" method="post">
+                        <a href="{{ route('RBA.RekapAjuanKegiatan.edit', $data->id) }}" class="btn btn-info text-sm mb-0">Edit</a>
+                        <form class="d-inline" action="{{ route('RBA.RekapAjuanKegiatan.destroy',$data->id) }}" method="post">
                           @csrf
                           @method('DELETE')
                           <button type="submit" name="submit" class="btn btn-danger text-sm mb-0 btndelete">Delete</button>
@@ -126,7 +138,7 @@
                   </tbody>
                 </table>
                 <div style="text-align: right; margin-right: 20vw;">
-                  <span class="text-sm font-weight-bold">total realisasi anggaran {{ number_format($totalAnggaran, 0, ",", ".") }}</span>
+                  <span class="text-sm font-weight-bold">TOTAL ANGGARAN :  {{ number_format($totalAnggaran, 0, ",", ".") }}</span>
                 </div>
                 </div>
               </div>
@@ -167,11 +179,11 @@
                     });
         
                     swalWithBootstrapButtons.fire({
-                        title: "Apakah kamu Yakin?",
-                        text: "Data akan hilang ketika kamu klik HAPUS",
+                        title: "Apakah kamu yakin",
+                        text: "Data akan hilang Jika kamu klik HAPUS",
                         icon: "warning",
                         showCancelButton: true,
-                        confirmButtonText: "Ya, Hapus!",
+                        confirmButtonText: "Ya, Hapus Rekap Data",
                         cancelButtonText: "Tidak, Batalkan!",
                         reverseButtons: true
                     }).then((result) => {
@@ -179,7 +191,7 @@
                             // Tambahkan penanganan hapus di sini dengan id yang ditemukan
                             $.ajax({
                                 type: 'POST',
-                                url: '{{ route('RBA.DaftarKegiatan.destroy', $data->id) }}',
+                                url: '{{ route('RBA.RekapAjuanKegiatan.destroy', $data->id) }}',
                                 data: {
                                     '_token': $('meta[name="csrf-token"]').attr('content'),
                                     '_method': 'DELETE'
@@ -223,7 +235,7 @@
         </script>
 
         
-        @include('RBA.script')
+        @include('RekapAjuanKegiatan.script')
           @endsection
         </main>
 

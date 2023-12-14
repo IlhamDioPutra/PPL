@@ -16,4 +16,9 @@ class DaftarKegiatan extends Model
         'nama_kegiatan' => 'required|unique:daftar_kegiatan',
         // tambahkan aturan unik untuk kolom lainnya
     ];
+
+    public function rekapAjuanKegiatan()
+    {
+        return $this->hasMany(RekapAjuanKegiatan::class);
+    }
 }
