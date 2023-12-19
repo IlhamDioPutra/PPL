@@ -17,7 +17,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td>{{ number_format($totalAnggaranAsli, 0, ',', '.') }}</td>
+            <td>{{ number_format($totalAnggaran, 0, ',', '.') }}</td>
             <td></td>
         </tr>
         @foreach ($datas as $data)

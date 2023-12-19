@@ -74,6 +74,9 @@
               <div style="text-align: right; margin-right: 20vw;">
                 <span class="text-sm font-weight-bold">total anggaran Yang diajukan : {{ number_format($totalRekapAnggaran, 0, ",", ".") }}</span>
             </div>
+            <form class="d-inline form-delete" action="" method="post">
+              @csrf
+              @method('DELETE')
                 <table class="table" id="dataTables">
                   <thead class="bg-gray-100">
                     <tr>
@@ -100,7 +103,7 @@
                     @else
                     @foreach ($datas as $data)
                     <tr>
-                      <input type="hidden" class="delete_id" value="{{ $data->id }}">
+                      
                       <th scope="row" class="text-sm text-secondary mb-0">{{ $loop->iteration }}</th>
                       <td class="text-sm text-secondary mb-0">{{ $data->DaftarKegiatan->no_form }}</td>
                       <td class="text-sm text-secondary mb-0">{{ $data->max }}</td>
@@ -116,11 +119,9 @@
                       <td class="text-sm text-secondary mb-0">{{ $data->DaftarKegiatan->sumber_dana }}</td>
                       <td class="text-sm text-secondary mb-0 text-center">
                         <a href="{{ route('RBA.RekapAjuanKegiatan.edit', $data->id) }}" class="btn btn-info text-sm mb-0">Edit</a>
-                        <form class="d-inline" action="{{ route('RBA.RekapAjuanKegiatan.destroy',$data->id) }}" method="post">
-                          @csrf
-                          @method('DELETE')
-                          <button type="submit" name="submit" class="btn btn-danger text-sm mb-0 btndelete">Delete</button>
-                        </form>
+                        <div class="d-inline form-delete">
+                          <button type="button" name="btn-delete" onclick="del()" data-id="{{ $data->id }}" class="btn btn-danger text-sm mb-0 btndelete">Delete</button>
+                        </div>
                       </td>
                     </tr>
                     @endforeach
@@ -137,6 +138,8 @@
                     </tr> --}}
                   </tbody>
                 </table>
+            </form>
+
                 <div style="text-align: right; margin-right: 20vw;">
                   <span class="text-sm font-weight-bold">TOTAL ANGGARAN :  {{ number_format($totalAnggaran, 0, ",", ".") }}</span>
                 </div>
@@ -163,11 +166,9 @@
           }
           @else
           <script>
-            $(document).ready(function () {
-                // Tangkap klik tombol delete
-                $('.btndelete').click(function (e) {
-                    e.preventDefault();
-                    var id = $(this).closest('tr').find('.delete_id').val();
+            function del() {
+              
+                    var id = $(this).data('id');
         
                     // Tampilkan SweetAlert dengan id yang ditemukan
                     const swalWithBootstrapButtons = Swal.mixin({
@@ -189,14 +190,9 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             // Tambahkan penanganan hapus di sini dengan id yang ditemukan
-                            $.ajax({
-                                type: 'POST',
-                                url: '{{ route('RBA.RekapAjuanKegiatan.destroy', $data->id) }}',
-                                data: {
-                                    '_token': $('meta[name="csrf-token"]').attr('content'),
-                                    '_method': 'DELETE'
-                                },
-                                success: function (data) {
+                            $('.form-delete').attr('action' , `{{ route('RBA.RekapAjuanKegiatan.destroy', "") }}/${id}`);
+                            $('.form-delete').submit();
+
                             // Berhasil menghapus, tampilkan pesan SweetAlert
                                    swalWithBootstrapButtons.fire({
                                       title: "Berhasil",
@@ -206,11 +202,28 @@
                                     // toastr.success('Data berhasil dihapus')
                                     location.reload();
                             });
-                        },
-                                error: function (data) {
-                                    console.log('Error:', data);
-                                }
-                            });
+                        //     $.ajax({
+                        //         type: 'POST',
+                        //         url: `{{ route('RBA.RekapAjuanKegiatan.destroy', "") }}/${id}`,
+                        //         data: {
+                        //             '_token': $('meta[name="csrf-token"]').attr('content'),
+                        //             '_method': 'DELETE'
+                        //         },
+                        //         success: function (data) {
+                        //     // Berhasil menghapus, tampilkan pesan SweetAlert
+                        //            swalWithBootstrapButtons.fire({
+                        //               title: "Berhasil",
+                        //               text: "Data telah dihapus",
+                        //               icon: "success"
+                        //             }).then((result) => {
+                        //             // toastr.success('Data berhasil dihapus')
+                        //             location.reload();
+                        //     });
+                        // },
+                        //         error: function (data) {
+                        //             console.log('Error:', data);
+                        //         }
+                        //     });
                         } else if (result.dismiss === Swal.DismissReason.cancel) {
                             swalWithBootstrapButtons.fire({
                                 title: "Dibatalkan",
@@ -219,7 +232,12 @@
                             });
                         }
                     });
-                });
+             
+            }
+
+            $(document).ready(function () {
+                // Tangkap klik tombol delete
+                
             });
             @endif
         </script>
