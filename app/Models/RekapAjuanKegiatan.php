@@ -16,4 +16,9 @@ class RekapAjuanKegiatan extends Model
     {
         return $this->belongsTo(DaftarKegiatan::class);
     }
+
+    public function spjBelanjaTUP()
+    {
+        return $this->hasMany(SpjBelanjaTup::class);
+    }
 }

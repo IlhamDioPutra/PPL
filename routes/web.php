@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DaftarKegiatanController;
 use App\Http\Controllers\RekapAjuanKegiatanController;
+use App\Http\Controllers\SpjBelanjaTupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,5 +47,12 @@ Route::post('RBA/RekapAjuanKegiatan/import', [RekapAjuanKegiatanController::clas
 Route::middleware(['auth'])->group(function () {
     Route::name('RBA.')->prefix('RBA')->group( function () {
         Route::resource('RekapAjuanKegiatan', RekapAjuanKegiatanController::class);
+    });
+});
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::name('TUP.')->prefix('TUP')->group( function () {
+        Route::resource('SpjBelanjaTup', SpjBelanjaTupController::class);
     });
 });

@@ -13,10 +13,21 @@ return new class extends Migration
     {
         Schema::create('spj_belanja_tups', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+
+             // Kolom-kolom tambahan sesuai kebutuhan
+             $table->enum('bulan', ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']);
+             $table->string('dokumen');
+             $table->integer('rencana_tup');
+             $table->integer('realisasi_tup');
+ 
+             // Foreign key ke daftar_kegiatan dan rekap_ajuan_kegiatans
+             $table->unsignedBigInteger('rekap_ajuan_kegiatan_id');
+             $table->unsignedBigInteger('daftar_kegiatan_id');
+             $table->foreign('rekap_ajuan_kegiatan_id')->references('id')->on('rekap_ajuan_kegiatans');
+             $table->foreign('daftar_kegiatan_id')->references('id')->on('daftar_kegiatan');
+             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */

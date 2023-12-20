@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 
 use App\Imports\UsersImport;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Models\DaftarKegiatan;
+use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\DaftarKegiatanExport;
@@ -106,9 +108,20 @@ class DaftarKegiatanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id) : JsonResponse
     {
-
+        $DaftarKegiatan = DaftarKegiatan::findOrFail($id);
+        return response()->json([
+            'code' => Response::HTTP_OK,
+            'message' => 'success',
+            'data' => [
+                'DaftarKegiatan' => DaftarKegiatan:: findOrFail($id),
+                'no_form' => $DaftarKegiatan->no_form,
+                'nama_kegiatan' => $DaftarKegiatan->nama_kegiatan,
+                'anggaran' => $DaftarKegiatan->anggaran,
+                'rekap_ajuan_kegiatans_id' => $DaftarKegiatan->rekapAjuanKegiatan,
+            ],
+        ]);
     }
 
     /**

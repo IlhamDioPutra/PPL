@@ -21,4 +21,9 @@ class DaftarKegiatan extends Model
     {
         return $this->hasMany(RekapAjuanKegiatan::class);
     }
+
+    public function spjBelanjaTUP()
+    {
+        return $this->hasMany(SpjBelanjaTup::class);
+    }
 }

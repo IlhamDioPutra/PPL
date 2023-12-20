@@ -26,7 +26,7 @@
                 <a class="sub-btn"><i class="fas fa-user"></i>Manajemen TUP<i class="fas fa-angle-right dropdown"></i></a>
                 <div class="sub-menu">
                   <a href="#" class="sub-item">Daftar Rincian Penggunaa TUP</a>
-                  <a href="#" class="sub-item">SPJ Belanja</a>
+                  <a href="{{ route('TUP.SpjBelanjaTup.index') }}" class="sub-item">SPJ Belanja</a>
                 </div>
               </div>
               <div class="item">
