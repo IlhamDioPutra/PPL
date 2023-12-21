@@ -51,6 +51,9 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
+Route::get('TUP/SpjBelanjaTup/{SpjBelanjaTup}/download', [SpjBelanjaTupController::class, 'download'])->middleware('auth')->name('TUP.SpjBelanjaTup.Download');
+
+
 Route::middleware(['auth'])->group(function () {
     Route::name('TUP.')->prefix('TUP')->group( function () {
         Route::resource('SpjBelanjaTup', SpjBelanjaTupController::class);

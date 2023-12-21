@@ -119,7 +119,7 @@ class DaftarKegiatanController extends Controller
                 'no_form' => $DaftarKegiatan->no_form,
                 'nama_kegiatan' => $DaftarKegiatan->nama_kegiatan,
                 'anggaran' => $DaftarKegiatan->anggaran,
-                'rekap_ajuan_kegiatans_id' => $DaftarKegiatan->rekapAjuanKegiatan,
+                'rekap_ajuan_kegiatan_id' => $DaftarKegiatan->rekapAjuanKegiatan,
             ],
         ]);
     }

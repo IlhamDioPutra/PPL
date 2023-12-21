@@ -13,7 +13,7 @@
                         </div>
             </div>
             <div class="col-lg-8 mt-5 ms-3">
-                <form method="post" action="{{ url('/TUP/SpjBelanjaTup') }}">
+                <form method="post" action="{{ url('/TUP/SpjBelanjaTup') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="daftar_kegiatan_id" class="form-label">Pilih No Form:</label>
@@ -28,16 +28,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="rekap_ajuan_kegiatans_id" class="form-label">Pilih Sub Kegiatan:</label>
-                        <select class="form-select" name="rekap_ajuan_kegiatans_id" id="rekap_ajuan_kegiatans_id" >
-                            
-                            {{-- @foreach ($daftarKegiatans as $daftarKegiatan)
-                                @if(old('daftar_kegiatan_id') == $daftarKegiatan->id)
-                                <option value="{{ $daftarKegiatan->id }}"selected>{{ $daftarKegiatan->no_form }}</option>
-                                @else
-                                <option value="{{ $daftarKegiatan->id }}">{{ $daftarKegiatan->no_form }}</option>
-                                @endif
-                            @endforeach --}}
+                        <label for="rekap_ajuan_kegiatan_id" class="form-label">Pilih Sub Kegiatan:</label>
+                        <select class="form-select" name="rekap_ajuan_kegiatan_id" id="rekap_ajuan_kegiatan_id" >
                         </select>
                     </div>
                     <div class="form-group">
@@ -56,10 +48,12 @@
                                 <option value="November">November</option>
                                 <option value="Desember">Desember</option>
                         </select>
+                    </div>
+                      
                     <div class="form-group">
                         <label for="dokumen" class="form-label"></label>
                         <input type="file" class="form-control" id="dokumen" placeholder="Pilih Dokumen"
-                            name="dokumen" value="{{ Session::get('dokumen') }}">
+                            name="dokumen">
                     </div>
                     <div class="form-group">
                         <label for="rencana_tup">RENCANA TUP</label>
@@ -90,10 +84,10 @@
                         url: '/api/v1/DaftarKegiatan/' + daftarKegiatanId, // Sesuaikan dengan endpoint API Anda
                         success: function (res) {
                             // Bersihkan opsi rekap_ajuan_kegiatans_id sebelum menambahkan yang baru
-                            $('#rekap_ajuan_kegiatans_id').empty();
+                            $('#rekap_ajuan_kegiatan_id').empty();
         
-                            res.data.rekap_ajuan_kegiatans_id.map(_data => {
-                                $('#rekap_ajuan_kegiatans_id').append(`<option value="${_data.id}">${_data.max} - ${_data.belanja}</option>`)
+                            res.data.rekap_ajuan_kegiatan_id.map(_data => {
+                                $('#rekap_ajuan_kegiatan_id').append(`<option value="${_data.id}">${_data.max} - ${_data.belanja}</option>`)
                             });
 
                         },

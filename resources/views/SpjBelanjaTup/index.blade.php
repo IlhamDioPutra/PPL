@@ -2,7 +2,7 @@
 @section('content')
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <div class="card border shadow-xs mb-4">
-          <h6 class="text-center">Rekap Surat Pertanggung Jawababan Belanja</h3>
+          <h6 class="text-center">Rekap Surat PertanggungJawaban Belanja TUP</h3>
           {{-- @include('component.pesan') --}}
             <div class="card-header border-bottom pb-0">
               <div class="d-sm-flex align-items-center">
@@ -62,15 +62,15 @@
                       
                       <th scope="row" class="text-sm text-secondary mb-0">{{ $loop->iteration }}</th>
                       <td class="text-sm text-secondary mb-0">{{ $data->DaftarKegiatan->no_form }}</td>
-                      <td class="text-sm text-secondary mb-0">{{ $data->max }}</td>
+                      <td class="text-sm text-secondary mb-0">{{ $data->RekapAjuanKegiatan->max }}</td>
                       <td class="text-sm text-secondary mb-0">{{ $data->DaftarKegiatan->nama_kegiatan }}</td>
-                      <td class="text-sm text-secondary mb-0">{{ $data->belanja }}</td>
-                      <td class="text-sm text-secondary mb-0">{{ $data->DaftarKegiatan->iku }}</td>
-                      <td class="text-sm text-secondary mb-0">{{ $data->vol }}</td>
-                      <td class="text-sm text-secondary mb-0">{{ $data->satuan }}</td>
-                      <td class="text-sm text-secondary mb-0">{{ number_format($data->biaya, 0, ",", ".") }}</td>
+                      <td class="text-sm text-secondary mb-0">{{ $data->RekapAjuanKegiatan->belanja  }}</td>
+                      <td class="text-sm text-secondary mb-0">{{ $data->bulan }}</td>
+                      <td class="text-sm text-secondary mb-0">{{ number_format($data->rencana_tup, 0, ",", ".") }}</td>
+                      <td class="text-sm text-secondary mb-0">{{ number_format($data->realisasi_tup, 0, ",", ".") }}</td>
                       <td class="text-sm text-secondary mb-0 text-center">
-                        <a href="{{ route('RBA.RekapAjuanKegiatan.edit', $data->id) }}" class="btn btn-info text-sm mb-0">Edit</a>
+                        <a href="{{ route('TUP.SpjBelanjaTup.Download', $data->id) }}" class="btn btn-success text-sm mb-0">Unduh Bukti</a>
+                        <a href="{{ route('TUP.SpjBelanjaTup.edit', $data->id) }}" class="btn btn-info text-sm mb-0">Edit</a>
                         <div class="d-inline form-delete">
                           <button type="button" name="btn-delete" onclick="del()" data-id="{{ $data->id }}" class="btn btn-danger text-sm mb-0 btndelete">Delete</button>
                         </div>
@@ -133,7 +133,7 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             // Tambahkan penanganan hapus di sini dengan id yang ditemukan
-                            $('.form-delete').attr('action' , `{{ route('RBA.RekapAjuanKegiatan.destroy', "") }}/${id}`);
+                            $('.form-delete').attr('action' , `{{ route('TUP.SpjBelanjaTup.destroy', "") }}/${id}`);
                             $('.form-delete').submit();
 
                             // Berhasil menghapus, tampilkan pesan SweetAlert

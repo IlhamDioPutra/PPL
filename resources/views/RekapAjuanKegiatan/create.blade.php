@@ -13,7 +13,7 @@
                         </div>
             </div>
             <div class="col-lg-8 mt-5 ms-3">
-                <form method="post" action="{{ url('/RBA/RekapAjuanKegiatan') }}">
+                <form method="post" action="{{ url('/RBA/RekapAjuanKegiatan') }} ">
                     @csrf
                     <div class="form-group">
                         <label for="no_form" class="form-label">Pilih No Form:</label>
