@@ -78,9 +78,7 @@
                     </tr>
                     @endforeach
                     @endif
-    
                   </tbody>
-                </form>
                 </table>
             </form>
 
