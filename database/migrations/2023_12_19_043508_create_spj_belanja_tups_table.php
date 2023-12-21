@@ -25,7 +25,6 @@ return new class extends Migration
              $table->unsignedBigInteger('daftar_kegiatan_id');
              $table->foreign('rekap_ajuan_kegiatan_id')->references('id')->on('rekap_ajuan_kegiatans');
              $table->foreign('daftar_kegiatan_id')->references('id')->on('daftar_kegiatan');
-             $table->timestamps();
         });
     }
     /**

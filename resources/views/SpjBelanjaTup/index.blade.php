@@ -72,7 +72,7 @@
                         <a href="{{ route('TUP.SpjBelanjaTup.Download', $data->id) }}" class="btn btn-success text-sm mb-0">Unduh Bukti</a>
                         <a href="{{ route('TUP.SpjBelanjaTup.edit', $data->id) }}" class="btn btn-info text-sm mb-0">Edit</a>
                         <div class="d-inline form-delete">
-                          <button type="button" name="btn-delete" onclick="del()" data-id="{{ $data->id }}" class="btn btn-danger text-sm mb-0 btndelete">Delete</button>
+                          <button type="button" name="btn-delete" onclick="del('{{ $data->id }}')" class="btn btn-danger text-sm mb-0 btndelete">Delete</button>
                         </div>
                       </td>
                     </tr>
@@ -80,6 +80,7 @@
                     @endif
     
                   </tbody>
+                </form>
                 </table>
             </form>
 
@@ -109,9 +110,9 @@
           }
           @else
           <script>
-            function del() {
+            function del(id) {
               
-                    var id = $(this).data('id');
+              var id = id;
         
                     // Tampilkan SweetAlert dengan id yang ditemukan
                     const swalWithBootstrapButtons = Swal.mixin({
@@ -132,7 +133,7 @@
                         reverseButtons: true
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            // Tambahkan penanganan hapus di sini dengan id yang ditemukan
+                            
                             $('.form-delete').attr('action' , `{{ route('TUP.SpjBelanjaTup.destroy', "") }}/${id}`);
                             $('.form-delete').submit();
 
@@ -177,11 +178,6 @@
                     });
              
             }
-
-            $(document).ready(function () {
-                // Tangkap klik tombol delete
-                
-            });
             @endif
         </script>
            <script>
@@ -196,7 +192,7 @@
         </script>
 
         
-        @include('RekapAjuanKegiatan.script')
+        @include('SpjBelanjaTup.script')
           @endsection
         </main>
 

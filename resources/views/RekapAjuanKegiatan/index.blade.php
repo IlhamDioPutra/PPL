@@ -120,7 +120,7 @@
                       <td class="text-sm text-secondary mb-0 text-center">
                         <a href="{{ route('RBA.RekapAjuanKegiatan.edit', $data->id) }}" class="btn btn-info text-sm mb-0">Edit</a>
                         <div class="d-inline form-delete">
-                          <button type="button" name="btn-delete" onclick="del()" data-id="{{ $data->id }}" class="btn btn-danger text-sm mb-0 btndelete">Delete</button>
+                          <button type="button" name="btn-delete" onclick="del('{{ $data->id }}')" class="btn btn-danger text-sm mb-0 btndelete">Delete</button>
                         </div>
                       </td>
                     </tr>
@@ -166,9 +166,9 @@
           }
           @else
           <script>
-            function del() {
+            function del(id) {
               
-                    var id = $(this).data('id');
+              var id = id;
         
                     // Tampilkan SweetAlert dengan id yang ditemukan
                     const swalWithBootstrapButtons = Swal.mixin({

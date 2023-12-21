@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\SpjBelanjaTup;
 use App\Models\DaftarKegiatan;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class SpjBelanjaTupController extends Controller
 {
@@ -79,7 +80,6 @@ class SpjBelanjaTupController extends Controller
             'bulan' => $request->bulan,
             'dokumen' => $dokumenFile,
             'rencana_tup' => $request->rencana_tup,
-            'biaya' => $request->biaya,
             'realisasi_tup' => $request->realisasi_tup, 
         ];
 
@@ -109,7 +109,9 @@ class SpjBelanjaTupController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = SpjBelanjaTup::where('id', $id)->first();
+        $daftarKegiatans = DaftarKegiatan::all();
+        return view('SpjBelanjaTup.edit', compact('data','daftarKegiatans'));
     }
 
     /**
@@ -117,15 +119,77 @@ class SpjBelanjaTupController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate(
+            [
+                'daftar_kegiatan_id' => 'required|numeric',
+                'rekap_ajuan_kegiatan_id' => 'required|numeric',
+                'bulan' => 'required',
+                'dokumen' => 'required|file',
+                'rencana_tup' => 'required|numeric|gt:0',
+                'realisasi_tup' => 'required|numeric|gt:0',
+            ],
+            [
+                'daftar_kegiatan_id.required' => 'NO FORM WAJIB DI ISI',
+                'daftar_kegiatan_id.numeric' => 'NO FORM HARUS ANGKA',
+                'rekap_ajuan_kegiatan_id.required' => 'Nama Sub Kegiatan WAJIB DI ISI',
+                'rekap_ajuan_kegiatan_id.numeric' => 'Nama Sub Kegiatan HARUS ANGKA',
+                'bulan.required' => 'NAMA BULAN WAJIB DI ISI',
+                'dokumen.required' => 'NAMA DOKUMEN WAJIB DI ISI',
+                'dokumen.file' => 'FILE HARUS ADA',
+                'rencana_tup.required' => 'ANGGARAN RENCANA TUP WAJIB DI ISI',
+                'rencana_tup.numeric' => 'ANGGARAN RENCANA TUP HARUS ANGKA',
+                'rencana_tup.gt' => 'ANGGARAN RENCANA TUP HARUS LEBIH BESAR DARI 0',
+                'realisasi_tup.required' => 'ANGGARAN REALISASI WAJIB DI ISI',
+                'realisasi_tup.numeric' => 'ANGGARAN REALISASI HARUS ANGKA SAJA',
+                'realisasi_tup.gt' => 'ANGGARAN REALISASI HARUS LEBIH BESAR DARI 0',
+            ]
+        );
+
+        $file = $request->file('dokumen');
+
+        $namaFile = time() . '_' . $file->getClientOriginalName();
+
+        $dokumenFile = $file->storeAs('SPJBelanjaTup', $namaFile);
+
+
+        
+        $datas = [
+            'daftar_kegiatan_id' => $request->daftar_kegiatan_id,
+            'rekap_ajuan_kegiatan_id' => $request->rekap_ajuan_kegiatan_id,
+            'bulan' => $request->bulan,
+            'dokumen' => $dokumenFile,
+            'rencana_tup' => $request->rencana_tup,
+            'realisasi_tup' => $request->realisasi_tup, 
+        ];
+
+        // $anggaranTotal = RekapAjuanKegiatan::with('daftarKegiatan')
+        //     ->where('id', $datas['daftar_kegiatan_id'])
+        //     ->value('daftar_kegiatan.anggaran');
+        
+
+
+
+        SPJBelanjaTup::where('id', $id)->update($datas); 
+        return redirect()->to('TUP/SPJBelanjaTup')->with('success', 'Data TUP Berhasil diupdate');
     }
+    
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        $data = SPJBelanjaTup::find($id);
+
+        if (!$data) {
+            return response()->json(['message' => 'Data not found.'], 404);
+        }
+        $data->delete();
+        
+        Storage::delete('public/'. $data->dokumen);
+
+        // Berikan respons sukses jika penghapusan berhasil
+        return redirect()->to('TUP/SPJBelanjaTup')->with('success','Data Belanja TUP berhasil dihapus');
     }
 
     public function download($id)
