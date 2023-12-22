@@ -19,7 +19,7 @@
                     <a href="{{ route('RBA.DaftarKegiatan.index') }}" class="sub-item">Daftar Kegiatan</a>
                     <a href="{{ route('RBA.RekapAjuanKegiatan.index') }}" class="sub-item">Rencana Kegiatan</a>
                     <a href="#" class="sub-item">Rekapitulasi Kegiatan</a>
-                    <a href="#" class="sub-item">Rekapitulasi Akhir</a>
+                    <a href="{{ route('RBA.RekapitulasiAkhir.index') }}" class="sub-item">Rekapitulasi Akhir</a>
                   </div>
                 </div>
               <div class="item">

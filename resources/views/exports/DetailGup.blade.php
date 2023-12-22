@@ -1,3 +1,4 @@
+<p>Rincian GUP bulan {{ $namaBulan->bulan }}</p>
 <table>
     <thead>
         <tr>

@@ -6,8 +6,9 @@ use App\Http\Controllers\RincianTupController;
 use App\Http\Controllers\SpjBelanjaGupController;
 use App\Http\Controllers\SpjBelanjaTupController;
 use App\Http\Controllers\DaftarKegiatanController;
-use App\Http\Controllers\RekapAjuanKegiatanController;
 use App\Http\Controllers\RekapKinerjaUpkController;
+use App\Http\Controllers\RekapitulasiAkhirController;
+use App\Http\Controllers\RekapAjuanKegiatanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +53,13 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('RekapAjuanKegiatan', RekapAjuanKegiatanController::class);
     });
 });
+Route::get('RBA/RekapitulasiAkhir/export', [RekapitulasiAkhirController::class, 'export'])->middleware('auth')->name('RBA.RekapitulasiAkhir.export');
+Route::middleware(['auth'])->group(function () {
+    Route::controller(RekapitulasiAkhirController::class)->group(function () {
+        Route::get('/RBA/RekapitulasiAkhir', 'index')->name('RBA.RekapitulasiAkhir.index');
+    });
+});
+
 
 
 Route::get('TUP/SpjBelanjaTup/{SpjBelanjaTup}/download', [SpjBelanjaTupController::class, 'downloadTup'])->middleware('auth')->name('TUP.SpjBelanjaTup.Download');
