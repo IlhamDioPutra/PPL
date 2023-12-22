@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RincianTupController;
+use App\Http\Controllers\SpjBelanjaGupController;
 use App\Http\Controllers\SpjBelanjaTupController;
 use App\Http\Controllers\DaftarKegiatanController;
 use App\Http\Controllers\RekapAjuanKegiatanController;
@@ -54,18 +55,22 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('TUP/SpjBelanjaTup/{SpjBelanjaTup}/download', [SpjBelanjaTupController::class, 'download'])->middleware('auth')->name('TUP.SpjBelanjaTup.Download');
 
-
 Route::middleware(['auth'])->group(function () {
     Route::name('TUP.')->prefix('TUP')->group( function () {
         Route::resource('SpjBelanjaTup', SpjBelanjaTupController::class);
     });
 });
 
-
 Route::middleware(['auth'])->group(function () {
     Route::controller(RincianTupController::class)->group(function () {
         Route::get('/TUP/RincianTup', 'index')->name('Tup.RincianTup.index');
         Route::get('/TUP/RincianTup/{bulan}', 'lihatDetail')->name('Tup.RincianTup.detail');
  
+    });
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::name('GUP.')->prefix('GUP')->group( function () {
+        Route::resource('SpjBelanjaGup', SpjBelanjaGupController::class);
     });
 });

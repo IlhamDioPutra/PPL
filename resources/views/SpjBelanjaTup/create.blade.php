@@ -51,7 +51,7 @@
                     </div>
                       
                     <div class="form-group">
-                        <label for="dokumen" class="form-label"></label>
+                        <label for="dokumen" class="form-label">Pilih Dokumen</label>
                         <input type="file" class="form-control" id="dokumen" placeholder="Pilih Dokumen"
                             name="dokumen">
                     </div>

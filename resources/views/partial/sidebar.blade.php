@@ -33,7 +33,7 @@
                 <a class="sub-btn"><i class="fas fa-user"></i>Manajemen GUP<i class="fas fa-angle-right dropdown"></i></a>
                 <div class="sub-menu">
                   <a href="#" class="sub-item">Rekap Kinerja UPK</a>
-                  <a href="#" class="sub-item">SPJ Belanja</a>
+                  <a href="{{ route('GUP.SpjBelanjaGup.index') }}"  class="sub-item">SPJ Belanja</a>
                 </div>
               </div>
           </div>

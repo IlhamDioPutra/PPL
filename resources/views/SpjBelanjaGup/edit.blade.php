@@ -3,8 +3,8 @@
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <div class="card border shadow-xs mb-4">
             <div class="card-header border-bottom pb-0">
-                <h6 class="font-weight-semibold text-lg mb-0">Edit Data SPJ Belanja TUP</h6>
-                <a href="{{ route('TUP.SpjBelanjaTup.index') }}" class="btn btn-secondary">
+                <h6 class="font-weight-semibold text-lg mb-0">Edit Data SPJ Belanja GUP</h6>
+                <a href="{{ route('GUP.SpjBelanjaGup.index') }}" class="btn btn-secondary">
                     << kembali</a>
                         @include('component.pesan')
                         <div class="d-sm-flex align-items-center">
@@ -13,7 +13,7 @@
                         </div>
             </div>
             <div class="col-lg-8 mt-5 ms-3">
-                <form method="post" action="{{ route('TUP.SpjBelanjaTup.update',$data->id) }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('GUP.SpjBelanjaGup.update',$data->id) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
@@ -57,15 +57,9 @@
                             name="dokumen" >
                     </div>
                     <div class="form-group">
-                        <label for="rencana_tup">RENCANA TUP</label>
-                        <input type="number" class="form-control" id="rencana_tup" placeholder=" Masukan Rencana Biaya TUP" name="rencana_tup"
-                        value="{{ $data->rencana_tup }}" >
-                    </div>
-                    <div class="form-group">
-                        <label for="realisasi_tup">REALISASI TUP</label>
-                        <input type="number" class="form-control" id="realisasi_tup"
-                            placeholder="Masukan Biaya realisasi TUP" name="realisasi_tup"
-                            value="{{ $data->realisasi_tup }}">
+                        <label for="biaya">BIAYA GUP</label>
+                        <input type="number" class="form-control" id="biaya" placeholder=" Masukan Biaya Kegiatan GUP" name="biaya"
+                        value="{{ $data->biaya }}" >
                     </div>
                     <div class="form-group text-center">
                         <button type="submit" class="btn btn-primary">Submit</button>
