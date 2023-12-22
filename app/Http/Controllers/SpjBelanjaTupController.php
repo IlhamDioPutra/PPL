@@ -192,7 +192,7 @@ class SpjBelanjaTupController extends Controller
         return redirect()->to('TUP/SPJBelanjaTup')->with('success','Data Belanja TUP berhasil dihapus');
     }
 
-    public function download($id)
+    public function downloadTup($id)
     {
         $spj = SpjBelanjaTup::findOrFail($id);
         $pathToFile = public_path("storage/{$spj->dokumen}");

@@ -67,7 +67,7 @@
                       <td class="text-sm text-secondary mb-0">{{ $data->bulan }}</td>
                       <td class="text-sm text-secondary mb-0">{{ number_format($data->biaya, 0, ",", ".") }}</td>
                       <td class="text-sm text-secondary mb-0 text-center">
-                        <a href="{{ route('TUP.SpjBelanjaTup.Download', $data->id) }}" class="btn btn-success text-sm mb-0">Unduh Bukti</a>
+                        <a href="{{ route('GUP.SpjBelanjaGup.download', $data->id) }}" class="btn btn-success text-sm mb-0">Unduh Bukti</a>
                         <a href="{{ route('GUP.SpjBelanjaGup.edit', $data->id) }}" class="btn btn-info text-sm mb-0">Edit</a>
                         <div class="d-inline form-delete">
                           <button type="button" name="btn-delete" onclick="del('{{ $data->id }}')" class="btn btn-danger text-sm mb-0 btndelete">Delete</button>

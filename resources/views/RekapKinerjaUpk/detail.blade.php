@@ -16,13 +16,7 @@
             <div class="card-body px-0 py-0">
                 
                 <div class="border-bottom py-3 px-3 d-sm-flex align-items-center">
-                  <span>
-                    @if(isset($namaBulan))
-                    <a href="{{ route('Tup.RincianTup.export', $namaBulan->bulan) }}" class="btn btn-success">Export Excel</a>
-                    @else
-                    @endif
-                    
-                  </span>
+                   
                 <div class="input-group w-sm-25 ms-auto">
                   <span class="input-group-text text-body">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -37,13 +31,10 @@
                     <tr>
                       <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light">NO</th>
                       <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light ps-2">No Form</th>
-                      <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light ps-2">Max</th>
                       <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light ps-2">Nama Kegiatan</th>
-                      <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light ps-2">PAGU Kegiatan</th>
+                      <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light ps-2">Mak</th>
                       <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light ps-2">Belanja</th>
-                      <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light ps-2">PAGU Belanja</th>
-                      <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light ps-2">Rencana TUP</th>
-                      <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light ps-2">Realisasi TUP</th>
+                      <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light ps-2">Total Biaya</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -56,13 +47,10 @@
                       
                       <th scope="row" class="text-sm text-secondary mb-0">{{ $loop->iteration }}</th>
                       <td class="text-sm text-secondary mb-0">{{ $data->DaftarKegiatan->no_form }}</td>
-                      <td class="text-sm text-secondary mb-0">{{ $data->RekapAjuanKegiatan->max }}</td>
                       <td class="text-sm text-secondary mb-0">{{ $data->DaftarKegiatan->nama_kegiatan }}</td>
-                      <td class="text-sm text-secondary mb-0">{{ number_format($data->DaftarKegiatan->anggaran, 0, ",", ".")  }}</td>
+                      <td class="text-sm text-secondary mb-0">{{ $data->RekapAjuanKegiatan->max }}</td>
                       <td class="text-sm text-secondary mb-0">{{ $data->RekapAjuanKegiatan->belanja  }}</td>
-                      <td class="text-sm text-secondary mb-0">{{ number_format($data->RekapAjuanKegiatan->anggaran_kegiatan, 0, ",", ".")  }}</td>
-                      <td class="text-sm text-secondary mb-0">{{ number_format($data->rencana_tup, 0, ",", ".") }}</td>
-                      <td class="text-sm text-secondary mb-0">{{ number_format($data->realisasi_tup, 0, ",", ".") }}</td>
+                      <td class="text-sm text-secondary mb-0">{{ number_format($data->biaya, 0, ",", ".")  }}</td>
                        
                     </tr>
                     @endforeach
@@ -70,10 +58,7 @@
                   </tbody>
                 </table>
                 <ul>
-                    <li>TOTAL Anggaran PAGU KEGIATAN : RP{{ number_format($totalAnggaranPagu, 0, ",", ".") }}</li>
-                    <li>TOTAL Anggaran PAGU BELANJA  : RP{{ number_format($totalAnggaranBelanja, 0, ",", ".") }}</li>
-                    <li>TOTAL Anggaran RENCANA TUP   : RP{{ number_format($totalRencanaTup, 0, ",", ".") }}</li>
-                    <li>TOTAL Anggaran REALISASI TUP  : RP{{ number_format($totalRealisasiTup, 0, ",", ".") }}</li>
+                    <li>TOTAL Biaya : RP{{ number_format($totalBiaya, 0, ",", ".") }}</li>
                 </ul>
                 @endif
                 </div>

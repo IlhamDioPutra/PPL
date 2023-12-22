@@ -171,4 +171,11 @@ class SpjBelanjaGupController extends Controller
         // Berikan respons sukses jika penghapusan berhasil
         return redirect()->to('GUP/SpjBelanjaGup')->with('success','Data Belanja TUP berhasil dihapus');
     }
+    public function downloadGup($id)
+    {
+        $gup = SpjBelanjaGup::findOrFail($id);
+        $pathToFile = public_path("storage/{$gup->dokumen}");
+
+        return response()->download($pathToFile);
+    }
 }

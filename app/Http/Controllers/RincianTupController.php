@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DetailTupExport;
 use Illuminate\Http\Request;
 use App\Models\SpjBelanjaTup;
 use App\Models\DaftarKegiatan;
 use Illuminate\Support\Carbon;
 use App\Models\RekapAjuanKegiatan;
+use Maatwebsite\Excel\Facades\Excel;
 
 class RincianTupController extends Controller
 {
@@ -76,5 +78,10 @@ class RincianTupController extends Controller
         $totalRealisasiTup = $datas->sum('realisasi_tup');
         
         return view('RincianTup.detail', compact('datas','namaBulan','totalAnggaranPagu','totalAnggaranBelanja','totalRencanaTup','totalRealisasiTup'));
+    }
+    public function export($bulan) 
+    {
+        return Excel::download(new DetailTupExport($bulan), 'DetailRekapTUP-' . $bulan .'.xlsx');
+        
     }
 }
