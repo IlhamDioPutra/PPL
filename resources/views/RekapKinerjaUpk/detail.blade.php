@@ -3,7 +3,7 @@
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <div class="card border shadow-xs mb-4">
             <div class="d-block ms-3 mt-2">
-                <a href="{{ route('Tup.RincianTup.index') }}" class="btn btn-secondary"><< kembali</a>
+                <a href="{{ route('Gup.RekapKinerjaUpk.index') }}" class="btn btn-secondary"><< kembali</a>
             </div>
             <h6 class="text-center">Rincian TUP bulan {{ optional($namaBulan)->bulan }}</h6>
           {{-- @include('component.pesan') --}}
@@ -16,6 +16,12 @@
             <div class="card-body px-0 py-0">
                 
                 <div class="border-bottom py-3 px-3 d-sm-flex align-items-center">
+                    <span>
+                        @if(isset($namaBulan))
+                        <a href="{{ route('Gup.RekapKinerjaUpk.export', $namaBulan->bulan) }}" class="btn btn-success">Export Excel</a>
+                        @else
+                        @endif
+                      </span>
                    
                 <div class="input-group w-sm-25 ms-auto">
                   <span class="input-group-text text-body">

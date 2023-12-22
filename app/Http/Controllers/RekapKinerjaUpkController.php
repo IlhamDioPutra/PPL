@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SpjBelanjaGup;
+use App\Exports\DetailGupExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class RekapKinerjaUpkController extends Controller
 {
@@ -21,5 +23,11 @@ class RekapKinerjaUpkController extends Controller
         return view('RekapKinerjaUpk.detail', compact('datas','namaBulan','totalBiaya'));
 
     
+    }
+
+    public function export($bulan) 
+    {
+        return Excel::download(new DetailGupExport($bulan), 'DetailRekapGUP-' . $bulan .'.xlsx');
+        
     }
 }

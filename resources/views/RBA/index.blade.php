@@ -23,7 +23,10 @@
                       <span class="btn-inner--text" style="font-size: 1.2em;">Tambahkan Data</span>
                     </button></a>
                     <span>
+                      @if(isset($datas))
                       <a href="{{ route('RBA.DaftarKegiatan.Export') }}" class="btn btn-success">Export Excel</a>
+                        @else
+                        @endif
                     </span>
                     <span>
                       <!-- Button trigger modal -->
@@ -72,7 +75,10 @@
                 </div>
               </div>
               <div style="text-align: right; margin-right: 20vw;">
+                @if(isset($totalAnggaran))
                 <span class="text-sm font-weight-bold">total anggaran {{ number_format($totalAnggaran, 0, ",", ".") }}</span>
+                @else
+                @endif
             </div>
             <form class="d-inline form-delete" action="" method="post">
               @csrf
@@ -127,9 +133,9 @@
                   </tbody>
                 </table>
               </form>
-                <div style="text-align: right; margin-right: 20vw;">
+                {{-- <div style="text-align: right; margin-right: 20vw;">
                   <span class="text-sm font-weight-bold">total realisasi anggaran {{ number_format($totalAnggaran, 0, ",", ".") }}</span>
-                </div>
+                </div> --}}
                 </div>
               </div>
               <div class="border-top py-3 px-3 d-flex align-items-center">

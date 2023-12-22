@@ -23,7 +23,10 @@
                       <span class="btn-inner--text" style="font-size: 1.2em;">Tambahkan Data Rekap Ajuan Kegiatan</span>
                     </button></a>
                     <span>
+                      @if(isset($datas))
                       <a href="{{ route('RBA.RekapAjuanKegiatan.Export') }}" class="btn btn-success">Export Excel</a>
+                      @else
+                      @endif
                     </span>
                     <span>
                       <!-- Button trigger modal -->
@@ -72,7 +75,10 @@
                 </div>
               </div>
               <div style="text-align: right; margin-right: 20vw;">
+                @if(isset($totalRekapAnggaran))
                 <span class="text-sm font-weight-bold">total anggaran Yang diajukan : {{ number_format($totalRekapAnggaran, 0, ",", ".") }}</span>
+                @else
+                @endif
             </div>
             <form class="d-inline form-delete" action="" method="post">
               @csrf
@@ -141,7 +147,10 @@
             </form>
 
                 <div style="text-align: right; margin-right: 20vw;">
+                  @if(isset($totalAnggaran))
                   <span class="text-sm font-weight-bold">TOTAL ANGGARAN :  {{ number_format($totalAnggaran, 0, ",", ".") }}</span>
+                  @else
+                  @endif
                 </div>
                 </div>
               </div>

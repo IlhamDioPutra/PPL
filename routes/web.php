@@ -83,6 +83,7 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(RekapKinerjaUpkController::class)->group(function () {
         Route::get('/GUP/RekapKinerjaUpk', 'index')->name('Gup.RekapKinerjaUpk.index');
         Route::get('/GUP/RekapKinerjaUpk/{bulan}', 'lihatDetail')->name('Gup.RekapKinerjaUpk.detail');
+        Route::get('/GUP/RekapKinerjaUpk/export/{bulan}', 'export')->name('Gup.RekapKinerjaUpk.export');
  
     });
 });
