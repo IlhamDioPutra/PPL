@@ -9,6 +9,7 @@ use App\Http\Controllers\DaftarKegiatanController;
 use App\Http\Controllers\RekapKinerjaUpkController;
 use App\Http\Controllers\RekapitulasiAkhirController;
 use App\Http\Controllers\RekapAjuanKegiatanController;
+use App\Http\Controllers\RekapitulasiKegiatanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,10 +54,18 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('RekapAjuanKegiatan', RekapAjuanKegiatanController::class);
     });
 });
-Route::get('RBA/RekapitulasiAkhir/export', [RekapitulasiAkhirController::class, 'export'])->middleware('auth')->name('RBA.RekapitulasiAkhir.export');
+
+Route::middleware(['auth'])->group(function () {
+    Route::controller(RekapitulasiKegiatanController::class)->group(function () {
+        Route::get('/RBA/RekapitulasiKegiatan', 'index')->name('RBA.RekapitulasiKegiatan.index');
+        Route::get('/RBA/RekapitulasiKegiatan/export', 'export')->name('RBA.RekapitulasiKegiatan.export');
+    });
+});
+
 Route::middleware(['auth'])->group(function () {
     Route::controller(RekapitulasiAkhirController::class)->group(function () {
         Route::get('/RBA/RekapitulasiAkhir', 'index')->name('RBA.RekapitulasiAkhir.index');
+        Route::get('/RBA/RekapitulasiAkhir/export', 'export')->name('RBA.RekapitulasiAkhir.export');
     });
 });
 
