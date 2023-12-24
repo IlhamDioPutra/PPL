@@ -25,7 +25,9 @@ return new class extends Migration
              // Foreign key ke daftar_kegiatan
              $table->unsignedBigInteger('daftar_kegiatan_id');
              $table->foreign('daftar_kegiatan_id')
-                   ->references('id')->on('daftar_kegiatan');
+                   ->references('id')->on('daftar_kegiatan')
+                   ->onDelete('CASCADE')  
+                   ->onUpdate('CASCADE');
         });
     }
 
