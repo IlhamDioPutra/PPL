@@ -4,11 +4,11 @@ namespace App\Imports;
 
 use App\Models\DaftarKegiatan;
 use Maatwebsite\Excel\Concerns\ToModel;
-use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithValidation;
 
-class DaftarKegiatanImport implements ToModel
+class DaftarKegiatanImport implements ToModel,WithHeadingRow,WithValidation
 {
-    private $totalAnggaranImported = 0;
     /**
     * @param array $row
     
@@ -17,36 +17,26 @@ class DaftarKegiatanImport implements ToModel
     */
     public function model(array $row)
     {
-         // Menghitung total anggaran yang diimpor
-        //  $this->totalAnggaranImported += (int)$row[5];
-
-        //  // Menghitung total anggaran keseluruhan (termasuk yang sudah ada di database)
-        //  $totalAnggaranDigunakan = DaftarKegiatan::sum('anggaran');
-        //  $totalAnggaranRealisasi = $this->totalAnggaranImported + $totalAnggaranDigunakan;
- 
-        //  // Menetapkan batasan anggaran
-        //  $batasanAnggaran = 600000000;
- 
-        //  // Memeriksa apakah total anggaran melebihi batasan
-        //  if ($totalAnggaranRealisasi > $batasanAnggaran) {
-        //      // Jika melebihi batasan, kembalikan null (tidak membuat instance model)
-        //      return null;
-        //  }
- 
-         // Jika tidak melebihi batasan, buat dan kembalikan instance model DaftarKegiatan
-         return new DaftarKegiatan([
-             'no_form' => $row[1],
-             'nama_kegiatan' => $row[2],
-             'iku' => $row[3],
-             'masukan_keluaran' => $row[4],
-             'anggaran' => $row[5],
-             'sumber_dana' => $row[6],
-         ]);
-
-    }
-    public function getTotalAnggaranImported()
+    
+        return new DaftarKegiatan( [
+            'no_form' => $row['output_no_form'],
+            'nama_kegiatan' => $row['nama_kegiatan'],
+            'iku' => $row['iku'],
+            'masukan_keluaran' => $row['masukan_keluaran_satuan'],
+            'anggaran' => $row['anggaran'],
+            'sumber_dana' => $row['sd']
+        ]);
+    } 
+    
+    public function rules(): array 
     {
-        return $this->totalAnggaranImported;
+        return[
+            '*.output_no_form' => ['unique:daftar_kegiatan,no_form'],
+            '*.nama_kegiatan' => ['unique:daftar_kegiatan,nama_kegiatan']
+
+        ];
+
     }
 
 }
+   

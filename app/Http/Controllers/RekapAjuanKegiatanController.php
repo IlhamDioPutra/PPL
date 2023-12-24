@@ -92,6 +92,7 @@ class RekapAjuanKegiatanController extends Controller
         $totalAnggaranKegiatan = RekapAjuanKegiatan::where('daftar_kegiatan_id', $datas['daftar_kegiatan_id'])
             ->sum('anggaran_kegiatan');
         $anggaranDimasukkan = $datas['anggaran_kegiatan'] + $totalAnggaranKegiatan;
+        // dd($anggaranTotal,$totalAnggaranKegiatan,$anggaranDimasukkan);
 
 
         if ($anggaranDimasukkan > $anggaranTotal ) {
@@ -176,8 +177,9 @@ class RekapAjuanKegiatanController extends Controller
                     ->value('anggaran');
         
         $totalAnggaranKegiatan = RekapAjuanKegiatan::where('daftar_kegiatan_id', $dataUpdate['daftar_kegiatan_id'])
-            ->sum('anggaran_kegiatan');
+            ->sum('anggaran_kegiatan') - $data->anggaran_kegiatan;
         $anggaranDimasukkan = $dataUpdate['anggaran_kegiatan'] + $totalAnggaranKegiatan;
+        // dd($anggaranTotal,$totalAnggaranKegiatan,$anggaranDimasukkan);
 
 
         if ($anggaranDimasukkan > $anggaranTotal ) {
