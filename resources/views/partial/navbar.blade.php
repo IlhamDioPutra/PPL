@@ -3,12 +3,7 @@
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center"></div>
             <div class="mb-0 font-weight-bold breadcrumb-text text-white">
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <a href="login" onclick="event.preventDefault(); this.closest('form').submit();">
-                        <button class="btn btn-sm btn-white mb-0 me-1" type="submit">Keluar</button>
-                    </a>
-                </form>
+                
             </div>
             <ul class="navbar-nav justify-content-end">
                 <!-- ... Bagian lain dari navbar ... -->
@@ -27,15 +22,15 @@
                                     Pengaturan Profil
                                 </a>
                             </li>
-                            <li class="dropdown">
-                                <a class="dropdown-item border-radius-md" href="javascript:;" id="toggleDarkMode" onclick="toggleDarkMode()">
-                                    <i class="fa fa-moon opacity-6 me-1"></i>
-                                    Ganti Mode
-                                </a>
-                                <div class="d-flex">
-                                    <button class="btn bg-gradient-primary w-100 px-3 mb-2 active" data-class="bg-slate-900" onclick="sidebarType(this)">Dark</button>
-                                    <button class="btn bg-gradient-primary w-100 px-3 mb-2 ms-2" data-class="bg-white" onclick="sidebarType(this)">White</button>
-                                </div>
+                            <li class="mb-2 d-flex" >
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <a href="login" onclick="event.preventDefault(); this.closest('form').submit();">
+                                        <button class="btn btn-sm btn-white mb-0 me-1" type="submit">
+                                        Keluar
+                                        <i class="fa fa-sign-out me-1"></i></button>
+                                    </a>
+                                </form>
                             </li>
                         </ul>
                     </div>
@@ -55,31 +50,6 @@
         });
 
         // Fungsi untuk menangani klik pada ikon mode terang/gelap
-        document.getElementById('toggleDarkMode').addEventListener('click', function() {
-            toggleDarkMode();
-        });
-
-        // Cek apakah mode terang/gelap tersimpan di localStorage
-        const savedMode = localStorage.getItem('themeMode');
-        const body = document.body;
-
-        if (savedMode) {
-            // Terapkan mode yang tersimpan saat halaman dimuat
-            body.classList.add(savedMode);
-        } else {
-            // Jika tidak ada status mode, tentukan mode default (misalnya, terang)
-            body.classList.add('light-mode');
-        }
     });
 
-    function toggleDarkMode() {
-        // Tambahkan logika untuk mengganti mode terang/gelap di sini
-        const body = document.body;
-        body.classList.toggle('dark-mode');
-        body.classList.toggle('light-mode');
-
-        // Simpan status mode ke localStorage
-        const isDarkMode = body.classList.contains('dark-mode');
-        localStorage.setItem('themeMode', isDarkMode ? 'dark-mode' : 'light-mode');
-    }
 </script>

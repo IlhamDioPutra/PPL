@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RincianTupController;
 use App\Http\Controllers\SpjBelanjaGupController;
 use App\Http\Controllers\SpjBelanjaTupController;
@@ -31,8 +32,9 @@ Route::controller(LoginController::class)->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::redirect('/', '/dashboard');
-    Route::view('/dashboard', 'Dashboard.dashboard')->name('dashboard');
+    Route::redirect('/', 'dashboard');
+    Route::get('/dashboard',[DashboardController::class, 'index'])->name('dashboard');
+    // Route::view('/dashboard', 'Dashboard.dashboard')->name('dashboard');
 });
 Route::get('RBA/DaftarKegiatan/export', [DaftarKegiatanController::class, 'export'])->middleware('auth')->name('RBA.DaftarKegiatan.Export');
 Route::post('RBA/DaftarKegiatan/import', [DaftarKegiatanController::class, 'import'])->middleware('auth')->name('RBA.DaftarKegiatan.Import');
