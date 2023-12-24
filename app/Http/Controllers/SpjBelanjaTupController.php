@@ -16,7 +16,8 @@ class SpjBelanjaTupController extends Controller
     public function index()
     {
         $datas = SpjBelanjaTup::all();
-        return view('SpjBelanjaTup.index',compact('datas'));
+        $totalAnggaran = SpjBelanjaTup::sum('realisasi_tup');
+        return view('SpjBelanjaTup.index',compact('datas','totalAnggaran'));
     }
     
 

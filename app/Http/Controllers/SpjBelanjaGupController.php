@@ -15,7 +15,8 @@ class SpjBelanjaGupController extends Controller
     public function index()
     {
         $datas = SpjBelanjaGup::all();
-        return view('SpjBelanjaGup.index',compact('datas'));
+        $totalAnggaran = SpjBelanjaGup::sum('biaya');
+        return view('SpjBelanjaGup.index',compact('datas','totalAnggaran'));
     }
 
     /**
