@@ -65,6 +65,9 @@
                         </div>
                       </div>
                     </span>
+                    <span class="ms-2">
+                      <a href="{{ route('RBA.RekapAjuanKegiatan.Panduan') }}" class="btn btn-info">Panduan Import <i class="fa fa-question-circle"></i></a>
+                    </span>
                 <div class="input-group w-sm-25 ms-auto">
                   <span class="input-group-text text-body">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">

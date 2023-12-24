@@ -38,6 +38,8 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::get('RBA/DaftarKegiatan/export', [DaftarKegiatanController::class, 'export'])->middleware('auth')->name('RBA.DaftarKegiatan.Export');
 Route::post('RBA/DaftarKegiatan/import', [DaftarKegiatanController::class, 'import'])->middleware('auth')->name('RBA.DaftarKegiatan.Import');
+Route::get('RBA/DaftarKegiatan/panduan', [DaftarKegiatanController::class, 'panduan'])->middleware('auth')->name('RBA.DaftarKegiatan.Panduan');
+Route::get('RBA/DaftarKegiatan/panduan/download', [DaftarKegiatanController::class, 'downloadContoh'])->middleware('auth')->name('RBA.DaftarKegiatan.Download');
 
 
 Route::middleware(['auth'])->group(function () {
@@ -50,6 +52,8 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('RBA/RekapAjuanKegiatan/export', [RekapAjuanKegiatanController::class, 'export'])->middleware('auth')->name('RBA.RekapAjuanKegiatan.Export');
 Route::post('RBA/RekapAjuanKegiatan/import', [RekapAjuanKegiatanController::class, 'import'])->middleware('auth')->name('RBA.RekapAjuanKegiatan.Import');
+Route::get('RBA/RekapAjuanKegiatan/panduan', [RekapAjuanKegiatanController::class, 'panduan'])->middleware('auth')->name('RBA.RekapAjuanKegiatan.Panduan');
+Route::get('RBA/RekapAjuanKegiatan/panduan/download', [RekapAjuanKegiatanController::class, 'downloadContoh'])->middleware('auth')->name('RBA.RekapAjuanKegiatan.Download');
 
 Route::middleware(['auth'])->group(function () {
     Route::name('RBA.')->prefix('RBA')->group( function () {

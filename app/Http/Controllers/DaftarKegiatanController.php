@@ -212,5 +212,14 @@ class DaftarKegiatanController extends Controller
            
         
     }
+    public function panduan() {
+
+        return view('RBA.panduan');
+    }
+    public function downloadContoh() {
+        $pathToFile = public_path("storage/ContohImport/Contoh_Import_DaftarKegiatan.xlsx");
+
+        return response()->download($pathToFile);
+    }
     
 }
