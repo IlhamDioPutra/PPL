@@ -2,7 +2,7 @@
 @section('content')
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <div class="card border shadow-xs mb-4">
-          <h6 class="text-center">Informasi Daftar Kegiatan</h3>
+          <h6 class="text-center">Informasi Rekap Ajuan Kegiatan</h3>
           {{-- @include('component.pesan') --}}
             <div class="card-header border-bottom pb-0">
               <div class="d-sm-flex align-items-center">

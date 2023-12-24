@@ -220,13 +220,13 @@ class RekapAjuanKegiatanController extends Controller
 
         $data->move('RekapAjuanKegiatan',$namafile);
 
-    
-
+        try {
             Excel::import(new RekapAjuanKegiatanImport, \public_path('/RekapAjuanKegiatan/'.$namafile));
             return redirect()->back()->with('success', 'Rekap Data berhasil diimpor');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Format data yang anda masukkan salah');
+        }
 
-        
-        
     }
         
 }

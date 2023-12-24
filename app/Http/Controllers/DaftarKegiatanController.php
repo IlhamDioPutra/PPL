@@ -203,9 +203,13 @@ class DaftarKegiatanController extends Controller
 
         $namafile = $data->getClientOriginalName();
 
-
-            Excel::import(new DaftarKegiatanImport,$data);
-            return redirect()->back()->with('success', 'Data berhasil diimpor');
+            try {
+                Excel::import(new DaftarKegiatanImport,$data);
+                return redirect()->back()->with('success', 'Data berhasil diimpor');
+            } catch (\Throwable $th) {
+                return redirect()->back()->with('error', 'Format data yang anda masukkan salah');
+            }
+           
         
     }
     
