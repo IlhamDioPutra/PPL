@@ -17,7 +17,8 @@
                                 </div>
                             </div>
                             <div class="card-header text-center" style="color: blueviolet; font-weight: 600;">Profile</div>
-
+                          
+                            @include('component.onlyError')
                             <div class="card-body">
                                 @if (session('success'))
                                     <div class="alert alert-success" role="alert">
@@ -47,7 +48,7 @@
 
                                     <div class="form-group">
                                         <label for="password">{{ __('New Password') }}</label>
-                                        <input type="password" name="password" id="password" class="form-control" >
+                                        <input type="password" name="password" id="password" class="form-control" required >
                                     </div>
 
                                     <div class="form-group">

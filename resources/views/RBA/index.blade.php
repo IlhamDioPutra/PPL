@@ -1,9 +1,8 @@
 @extends('app.main')
-@section('pageTitle', 'Manajemen RBA')
 @section('content')
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <div class="card border shadow-xs mb-4">
-          <h6 class="text-center" style="padding-top: 15px;margin-bottom: 8px;margin-top: 8px;margin-left: 15px;">Informasi Daftar Kegiatan</h3>
+          <h6 class="text-center">Informasi Daftar Kegiatan</h3>
           @include('component.onlyError')
             <div class="card-header border-bottom pb-0">
               <div class="d-sm-flex align-items-center">
@@ -12,7 +11,7 @@
               </div>
             </div>
             <div class="card-body px-0 py-0">
-
+                
                 <div class="border-bottom py-3 px-3 d-sm-flex align-items-center">
                   <a href="{{ route('RBA.DaftarKegiatan.create') }}">
                   <button type="button" class="btn btn-sm btn-dark btn-icon d-flex align-items-center me-2">
@@ -66,6 +65,9 @@
                         </div>
                       </div>
                     </span>
+                    <span class="ms-2">
+                      <a href="{{ route('RBA.DaftarKegiatan.Panduan') }}" class="btn btn-info">Panduan Import <i class="fa fa-question-circle"></i></a>
+                    </span>
                 <div class="input-group w-sm-25 ms-auto">
                   <span class="input-group-text text-body">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -98,9 +100,9 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @if ($datas->count() === 0)
-
-
+                    @if ($datas->count() === 0) 
+                      
+                    
                     @else
                     @foreach ($datas as $data)
                     <tr>
@@ -141,12 +143,12 @@
               </div>
               <div class="border-top py-3 px-3 d-flex align-items-center">
                 {{-- toastr --}}
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
-                integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
-                crossorigin="anonymous"
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" 
+                integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" 
+                crossorigin="anonymous" 
                 referrerpolicy="no-referrer"></script>
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
-                crossorigin="anonymous"
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" 
+                crossorigin="anonymous" 
                 referrerpolicy="no-referrer"/>
                 {{--  --}}
                 {{-- alert delete --}}
@@ -161,9 +163,9 @@
           @else
           <script>
              function del(id) {
-
+              
               var id = id;
-
+        
                     // Tampilkan SweetAlert dengan id yang ditemukan
                     const swalWithBootstrapButtons = Swal.mixin({
                         customClass: {
@@ -172,7 +174,7 @@
                         },
                         buttonsStyling: false
                     });
-
+        
                     swalWithBootstrapButtons.fire({
                         title: "Apakah kamu yakin",
                         text: "Data akan hilang Jika kamu klik HAPUS",
@@ -226,27 +228,27 @@
                             });
                         }
                     });
-
+             
             }
 
             $(document).ready(function () {
                 // Tangkap klik tombol delete
-
+                
             });
             @endif
         </script>
            <script>
             @if (Session::has('success'))
             toastr.success("{{ Session::get('success') }}")
-           @endif
+           @endif 
         </script>
            <script>
             @if (Session::has('error'))
             toastr.error("{{ Session::get('error') }}")
-           @endif
+           @endif 
         </script>
 
-
+        
         @include('RBA.script')
           @endsection
         </main>

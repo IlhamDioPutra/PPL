@@ -33,9 +33,12 @@
                   <input type="text" class="form-control" placeholder="Search" id="search">
                 </div>
               </div>
-              {{-- <div style="text-align: right; margin-right: 20vw;">
-                <span class="text-sm font-weight-bold">total anggaran Yang diajukan : {{ number_format($totalRekapAnggaran, 0, ",", ".") }}</span>
-            </div> --}}
+              <div style="text-align: right; margin-right: 20vw;">
+              @if(isset($totalAnggaran))
+              <span class="text-sm font-weight-bold">total anggaran GUP yang dikeluarkan: Rp.{{ number_format($totalAnggaran, 0, ",", ".") }}</span>
+              @else
+              @endif
+              </div>
             <form class="d-inline form-delete" action="" method="post">
               @csrf
               @method('DELETE')
@@ -49,7 +52,7 @@
                       <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light ps-2">Belanja</th>
                       <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light ps-2">Bulan</th>
                       <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light ps-2">Biaya</th>
-                      <th scope="col" class="text-secondary text-center text-sm font-weight-bold opacity-7 border-light ps-2">Aksi</th>
+                      <th scope="col" class="text-secondary text-center text-sm font-weight-bold opacity-7 border-light text-center ps-2">Aksi</th>
                     </tr>
                   </thead>
                   <tbody>

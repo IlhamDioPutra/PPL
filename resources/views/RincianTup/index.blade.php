@@ -26,7 +26,7 @@
                     <tr>
                       <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light">NO</th>
                       <th scope="col" class="text-secondary text-sm font-weight-bold opacity-7 border-light ps-2">Nama Bulan</th>
-                      <th scope="col" class="text-secondary text-center text-sm font-weight-bold opacity-7 border-light ps-2">Aksi</th>
+                      <th scope="col" class="text-secondary text-center text-sm font-weight-bold opacity-7 border-light ps-2 ">Aksi</th>
                     </tr>
                   </thead>
                   <tbody>

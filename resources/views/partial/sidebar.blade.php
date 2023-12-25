@@ -25,15 +25,15 @@
               <div class="item">
                 <a class="sub-btn"><i class="fas fa-user"></i>Manajemen TUP<i class="fas fa-angle-right dropdown"></i></a>
                 <div class="sub-menu">
-                  <a href="{{ route('Tup.RincianTup.index') }}" class="sub-item">Daftar Rincian</a>
                   <a href="{{ route('TUP.SpjBelanjaTup.index') }}" class="sub-item">SPJ Belanja</a>
+                  <a href="{{ route('Tup.RincianTup.index') }}" class="sub-item">Daftar Rincian</a>
                 </div>
               </div>
               <div class="item">
                 <a class="sub-btn"><i class="fas fa-user"></i>Manajemen GUP<i class="fas fa-angle-right dropdown"></i></a>
                 <div class="sub-menu">
-                  <a href="{{ route('Gup.RekapKinerjaUpk.index') }}" class="sub-item">Rekap Kinerja UPK</a>
                   <a href="{{ route('GUP.SpjBelanjaGup.index') }}"  class="sub-item">SPJ Belanja</a>
+                  <a href="{{ route('Gup.RekapKinerjaUpk.index') }}" class="sub-item">Rekap Kinerja UPK</a>
                 </div>
               </div>
           </div>

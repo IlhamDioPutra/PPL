@@ -1,5 +1,4 @@
 @extends('app.main')
-@section('pageTitle', 'Manajemen RBA')
 @section('content')
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <div class="card border shadow-xs mb-4">

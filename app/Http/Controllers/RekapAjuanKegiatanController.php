@@ -228,6 +228,17 @@ class RekapAjuanKegiatanController extends Controller
         }
 
     }
+
+    public function panduan() {
+
+        return view('RekapAjuanKegiatan.panduan');
+    }
+
+    public function downloadContoh() {
+        $pathToFile = public_path("Contoh/Contoh_Import_RekapAjuanKegiatan.xlsx");
+
+        return response()->download($pathToFile);
+    }
         
 }
 

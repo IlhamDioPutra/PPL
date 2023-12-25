@@ -33,9 +33,12 @@
                   <input type="text" class="form-control" placeholder="Search" id="search">
                 </div>
               </div>
-              {{-- <div style="text-align: right; margin-right: 20vw;">
-                <span class="text-sm font-weight-bold">total anggaran Yang diajukan : {{ number_format($totalRekapAnggaran, 0, ",", ".") }}</span>
-            </div> --}}
+              @if(isset($totalAnggaran))
+              <div style="text-align: right; margin-right: 20vw;">
+              <span class="text-sm font-weight-bold">total anggaran TUP yang direalisasi: Rp.{{ number_format($totalAnggaran, 0, ",", ".") }}</span>
+              @else
+              @endif
+              </div>
             <form class="d-inline form-delete" action="" method="post">
               @csrf
               @method('DELETE')
@@ -55,7 +58,6 @@
                   </thead>
                   <tbody>
                     @if ($datas->count() === 0)
-
 
                     @else
                     @foreach ($datas as $data)

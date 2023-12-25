@@ -23,9 +23,16 @@ class ProfileController extends Controller
         $request->validate([
             'name' => 'required|min:3|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
-            'password' => 'nullable|min:6', // Password bisa kosong atau minimal 6 karakter
+            'password' => 'required|min:6', // Password bisa kosong atau minimal 6 karakter
             'location' => 'max:255',
-        ]);
+        ]
+        // [
+        //     'name.min:3' => 'NAMAYANG ANDA MASUKKAN MINIMAL TERDIRI DARI 3 SIMBOL, ANGKA, ATAU HURUF',
+        //     'email.min:3' => 'EMAIL YANG ANDA MASUKKAN MINIMAL TERDIRI DARI 3 SIMBOL, ANGKA, ATAU HURUF',
+        //     'email.unique:users,email' => 'EMAIL YANG ANDA MASUKKAN TELAH DIGUNAKAN OLEH USER LAIN',
+        //     'password.min:3' => 'EMAIL YANG ANDA MASUKKAN MINIMAL TERDIRI DARI 3 SIMBOL, ANGKA, ATAU HURUF',
+        // ]
+    );
 
         $data = [
             'name' => $request->name,
@@ -35,9 +42,9 @@ class ProfileController extends Controller
         ];
 
         // Update password jika diisi
-        if (!empty($request->password)) {
-            $data['password'] = Hash::make($request->password);
-        }
+        // if (!empty($request->password)) {
+        //     $data['password'] = Hash::make($request->password);
+        // }
 
         User::find(Auth::id())->update($data);
 
